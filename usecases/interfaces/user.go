@@ -1,5 +1,7 @@
 package interfaces
 
+import "github.com/gin-gonic/gin"
+
 type User interface {
-	Get()
+	Get(c *gin.Context)
 }

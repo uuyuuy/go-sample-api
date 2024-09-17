@@ -1,18 +1,18 @@
 package usecases
 
 import (
+	"002_sample-go-app/repositories"
 	"002_sample-go-app/repositories/interfaces"
 	"github.com/gin-gonic/gin"
-	"github.com/samber/do/v2"
 )
 
 type User struct {
-	repository *interfaces.User
+	repository interfaces.User
 }
 
-func NewUserUseCase(i do.Injector) (*User, error) {
+func NewUserUseCase(repository *repositories.User) (*User, error) {
 	return &User{
-		repository: do.MustInvoke[*interfaces.User](i),
+		repository: repository,
 	}, nil
 }
 
