@@ -2,9 +2,10 @@ version: '3.1'
 
 services:
   db:
-    image: mysql
+    image: mysql:9.0
     restart: always
     environment:
+      MYSQL_DATABASE: sample # 任意のデータベース
       MYSQL_ROOT_PASSWORD: example # 任意のパスワード
     ports:
       - "3306:3306"

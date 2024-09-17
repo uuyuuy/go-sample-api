@@ -6,7 +6,7 @@ type User struct {
 	ID        int       `gorm:"type:integer; primaryKey, autoIncrement, not null"`
 	LastName  string    `gorm:"type:varchar(100); not null"`
 	FirstName string    `gorm:"type:varchar(100); not null"`
-	Tel       string    `gorm:"type:integer; not null"`
+	Tel       string    `gorm:"type:varchar(20)"`
 	Age       int       `gorm:"type:integer"`
 	CreatedAt time.Time `gorm:"autoCreateTime"`
 	UpdatedAt time.Time `gorm:"autoUpdateTime"`
