@@ -2,6 +2,7 @@ package main
 
 import (
 	"002_sample-go-app/handlers"
+	"002_sample-go-app/migration"
 	"002_sample-go-app/repositories"
 	"002_sample-go-app/usecases"
 	"fmt"
@@ -11,6 +12,7 @@ import (
 	"gorm.io/gorm"
 	"log"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -24,6 +26,15 @@ func main() {
 	dsn := fmt.Sprintf("%s:%s@tcp(127.0.0.1:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		os.Getenv("DATABASE_USER"), os.Getenv("DATABASE_PASS"), os.Getenv("DATABASE_PORT"), os.Getenv("DATABASE_NAME"))
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+
+	// migration
+	m, err := strconv.ParseBool(os.Getenv("MIGRATION"))
+	if m == true {
+		err := migration.CreateTables(db)
+		if err != nil {
+			log.Fatal(err.Error())
+		}
+	}
 
 	// DI
 	userRepository, err := repositories.NewUserRepository(db)
@@ -39,7 +50,7 @@ func main() {
 		return
 	}
 
-	// Router
+	// router
 	r := gin.Default()
 	group := r.Group("/v1")
 
