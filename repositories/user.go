@@ -2,12 +2,17 @@ package repositories
 
 import (
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
-type User struct{}
+type User struct {
+	db *gorm.DB
+}
 
-func NewUserRepository() (*User, error) {
-	return &User{}, nil
+func NewUserRepository(db *gorm.DB) (*User, error) {
+	return &User{
+		db: db,
+	}, nil
 }
 
 func (r *User) Get(c *gin.Context) {
