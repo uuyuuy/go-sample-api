@@ -4,7 +4,7 @@ import datetime
 
 fake = Faker('ja_JP')
 
-sql_template = "INSERT INTO users (last_name, first_name, tel, age, created_at, updated_at) VALUES ('{last_name}', '{first_name}', '{tel}', {age}, '{created_at}', '{updated_at}');"
+sql_template = "INSERT INTO users (last_name, first_name, tel, age) VALUES ('{last_name}', '{first_name}', '{tel}', {age});"
 
 def generate_phone_number():
     return f"{random.randint(1000000000, 9999999999)}"

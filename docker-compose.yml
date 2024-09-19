@@ -11,7 +11,8 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-
+      - ./migration/my.conf:/etc/mysql/my.cnf
+      - ./scripts/dummy_data:/dummy_data
 volumes:
   db_data:
     driver: local
